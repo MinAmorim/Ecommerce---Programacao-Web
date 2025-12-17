@@ -1,0 +1,69 @@
+.home-wrapper {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: url("/src/assets/bg2.jpg") no-repeat center/cover;
+  padding: 20px;
+}
+
+.home-card {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(12px);
+  border-radius: 20px;
+  padding: 40px 50px;
+  width: 420px;
+  text-align: center;
+  border: 1.5px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 0 25px rgba(0,0,0,0.20);
+}
+
+.home-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 8px;
+}
+
+.home-subtitle {
+  font-size: 15px;
+  color: #fceffd;
+  margin-bottom: 30px;
+}
+
+
+.home-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.home-btn {
+  padding: 12px 20px;
+  border-radius: 30px;
+  border: none;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.25s ease-in-out;
+}
+
+.home-btn.update {
+  background: #ffb3d6;
+  color: #3c3c3c;
+}
+
+.home-btn.update:hover {
+  background: #ff8ec2;
+  transform: scale(1.05);
+}
+
+.home-btn.logout {
+  background: #ff6b6b;
+  color: #fff;
+}
+
+.home-btn.logout:hover {
+  background: #e84343;
+  transform: scale(1.05);
+}
