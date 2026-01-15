@@ -11,7 +11,7 @@ function Home() {
   const [loading, setLoading] = useState(true);
   const [isAdmin, setIsAdmin] = useState(false);
 
-  // estado para armazenar tamanho e quantidade  de cada produto
+  // estado para armazenar tamanho e quantidade selecionados de cada produto
   const [selecoes, setSelecoes] = useState({});
 
   useEffect(() => {
@@ -66,7 +66,6 @@ function Home() {
       return;
     }
 
-    // verificar se a quantidade pedida existe no estoque daquele tamanho
     const tamanhoEstoque = produto.tamanhos.find(t => t.tamanho === tamanho);
     if (tamanhoEstoque && quantidade > tamanhoEstoque.quantidade) {
       alert(`Só temos ${tamanhoEstoque.quantidade} unidades do tamanho ${tamanho}.`);
@@ -81,8 +80,8 @@ function Home() {
     <div className="home-container">
       <header className="user-header">
         <div className="welcome-section">
-          <h1>Bem-vinda de volta! ✨</h1>
-          <p>{isAdmin ? "Modo Administrador 🛠️" : "Confira as novidades!"}</p>
+          <h1>Bem-vinda de volta!</h1>
+          <p>{isAdmin ? "Modo Administrador " : "Confira as novidades!"}</p>
         </div>
         
         <div className="user-actions">
@@ -114,6 +113,7 @@ function Home() {
             {produtos.map((produto) => {
               const selecao = selecoes[produto.id] || { quantidade: 1, tamanho: "" };
 
+              
               const estoqueTotal = produto.tamanhos 
                 ? produto.tamanhos.reduce((acc, t) => acc + t.quantidade, 0) 
                 : 0;
@@ -134,7 +134,6 @@ function Home() {
                   {!isAdmin && (
                     <div className="product-controls" style={{ margin: "10px 0", padding: "10px", background: "#f9f9f9", borderRadius: "5px" }}>
                       
-                      
                       <div style={{ marginBottom: "8px" }}>
                         <label style={{ fontSize: "0.9rem", marginRight: "5px" }}>Tamanho:</label>
                         <select 
@@ -143,7 +142,6 @@ function Home() {
                           style={{ padding: "5px", borderRadius: "4px", border: "1px solid #ddd" }}
                         >
                           <option value="">Selecione...</option>
-                          
                           {produto.tamanhos && produto.tamanhos.map(t => (
                             <option key={t.id} value={t.tamanho} disabled={t.quantidade === 0}>
                               {t.tamanho} {t.quantidade === 0 ? "(Esgotado)" : ""}
@@ -167,14 +165,17 @@ function Home() {
                   )}
 
                   <div className="card-footer">
+                    {isAdmin && (
+                        <span className="stock-badge">Estoque Total: {estoqueTotal}</span>
+                    )}
                     
-                    <span className="stock-badge">Estoque Total: {estoqueTotal}</span>
                     
                     {!isAdmin && estoqueTotal > 0 && (
                       <button className="buy-btn" onClick={() => handleComprar(produto)}>
                         Adicionar
                       </button>
                     )}
+                    
                     
                     {estoqueTotal === 0 && <span style={{color: "red", fontWeight: "bold"}}>ESGOTADO</span>}
                   </div>
