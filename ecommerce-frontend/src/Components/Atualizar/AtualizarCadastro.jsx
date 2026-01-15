@@ -13,7 +13,7 @@ function AtualizarCadastro() {
 
   const navigate = useNavigate();
 
-  // Carrega dados atuais do usuário
+  // carrega dados atuais do usuário
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (!token) {
@@ -34,7 +34,7 @@ function AtualizarCadastro() {
       });
   }, []);
 
-  //Envia atualização
+  //envia atualização
   const handleAtualizar = async (e) => {
     e.preventDefault();
     setMsg("");
@@ -48,7 +48,7 @@ function AtualizarCadastro() {
         {
           nome,
           email,
-          senha: senha || undefined, // senha só é enviada se for preenchida
+          senha: senha || undefined, 
         },
         {
           headers: { Authorization: `Bearer ${token}` },
@@ -56,7 +56,7 @@ function AtualizarCadastro() {
       );
 
       setMsg("Dados atualizados com sucesso!");
-      setSenha(""); // limpa campo de senha
+      setSenha(""); 
     } catch (err) {
       setErro("Erro ao atualizar: verifique os dados.");
       console.log(err);

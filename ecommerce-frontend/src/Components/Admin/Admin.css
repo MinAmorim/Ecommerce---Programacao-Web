@@ -1,0 +1,120 @@
+
+
+.admin-container {
+  padding: 2rem 4rem;
+  max-width: 1000px;
+  margin: 0 auto;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.admin-container h2 {
+  color: #2c3e50;
+  border-bottom: 2px solid #8e44ad;
+  padding-bottom: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+
+.admin-form {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.admin-form.vertical {
+  flex-direction: column;
+}
+
+.form-row {
+  display: flex;
+  gap: 1rem;
+}
+
+.admin-form input, 
+.admin-form select, 
+.admin-form textarea {
+  padding: 0.8rem;
+  border: 1px solid #bdc3c7;
+  border-radius: 4px;
+  flex: 1;
+  font-size: 1rem;
+}
+
+.admin-form textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+
+.btn-save {
+  background-color: #27ae60;
+  color: white;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.2s;
+}
+
+.btn-save:hover {
+  background-color: #2ecc71;
+}
+
+.btn-delete {
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-left: 1rem;
+}
+
+.btn-delete-sm {
+  background-color: #c0392b;
+  color: white;
+  border: none;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 0.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.admin-list {
+  list-style: none;
+  padding: 0;
+}
+
+.admin-list li {
+  background: white;
+  padding: 1rem;
+  border-bottom: 1px solid #ecf0f1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.product-list-admin {
+  display: grid;
+  gap: 1rem;
+}
+
+.admin-product-item {
+  background: white;
+  padding: 1rem;
+  border-radius: 6px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
