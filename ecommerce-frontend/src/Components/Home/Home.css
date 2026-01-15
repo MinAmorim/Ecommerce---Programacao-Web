@@ -1,12 +1,12 @@
 .home-container {
   min-height: 100vh;
-  background-color: #f8f9fa;
+  background-color: #F4E0E5;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 
 .user-header {
-  background-color: #ffffff;
+  background-color: #ED8CA3;
   padding: 2rem 3rem;
   display: flex;
   justify-content: space-between;

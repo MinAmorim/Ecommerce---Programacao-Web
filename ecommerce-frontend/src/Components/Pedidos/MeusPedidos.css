@@ -1,0 +1,101 @@
+.meus-pedidos-container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.header-pedidos {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 15px;
+}
+
+.btn-voltar {
+    background-color: #95a5a6;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-voltar:hover {
+    background-color: #7f8c8d;
+}
+
+.empty-msg {
+    text-align: center;
+    color: #777;
+    margin-top: 30px;
+}
+
+.card-pedido {
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    overflow: hidden;
+}
+
+.pedido-header {
+    background-color: #f8f9fa;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #eee;
+}
+
+.data-pedido {
+    display: block;
+    font-size: 0.85rem;
+    color: #666;
+    margin-top: 4px;
+}
+
+.status-pedido {
+    background-color: #2ecc71;
+    color: white;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+.itens-pedido {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.itens-pedido li {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 15px;
+    border-bottom: 1px solid #f1f1f1;
+    font-size: 0.95rem;
+}
+
+.itens-pedido li:last-child {
+    border-bottom: none;
+}
+
+.nome-produto {
+    font-weight: 500;
+    flex: 1;
+}
+
+.pedido-total {
+    background-color: #fcfcfc;
+    padding: 15px;
+    text-align: right;
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: #2c3e50;
+    border-top: 1px solid #eee;
+}

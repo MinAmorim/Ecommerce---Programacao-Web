@@ -29,6 +29,7 @@ public class PedidoController {
         this.usuarioRepository = usuarioRepository;
     }
 
+     
     @PostMapping
     @Transactional
     public ResponseEntity<?> criarPedido(@RequestBody List<ItemPedidoDTO> itensDTO) {
@@ -83,9 +84,28 @@ public class PedidoController {
         return ResponseEntity.ok("Pedido realizado com sucesso!");
     }
     
+    
     @GetMapping("/meus-pedidos")
     public List<Pedido> listarMeusPedidos() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         return pedidoRepository.findByUsuarioLogin(auth.getName());
+    }
+
+    
+
+    
+    @GetMapping("/admin")
+    public List<Pedido> listarTodosPedidos() {
+        return pedidoRepository.findAll();
+    }
+
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deletarPedido(@PathVariable Long id) {
+        if (pedidoRepository.existsById(id)) {
+            pedidoRepository.deleteById(id);
+            return ResponseEntity.ok("Pedido excluído com sucesso.");
+        }
+        return ResponseEntity.badRequest().body("Pedido não encontrado.");
     }
 }

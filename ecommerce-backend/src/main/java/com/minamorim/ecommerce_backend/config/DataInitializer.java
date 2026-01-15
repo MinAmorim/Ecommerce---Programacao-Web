@@ -20,7 +20,7 @@ public class DataInitializer {
                 admin.setNome("Administrador");
                 admin.setEmail("admin@loja.com");
                 admin.setLogin("admin@loja.com");
-                admin.setSenha(passwordEncoder.encode("123456")); // Senha padrão
+                admin.setSenha(passwordEncoder.encode("123456")); // senha padrão
                 admin.setRole("ROLE_ADMIN");
 
                 usuarioRepository.save(admin);

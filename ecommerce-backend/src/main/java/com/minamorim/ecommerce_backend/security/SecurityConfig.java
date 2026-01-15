@@ -25,7 +25,6 @@ public class SecurityConfig {
 
         http.csrf(csrf -> csrf.disable());
         
-        
         http.cors(cors -> cors.configurationSource(request -> {
             CorsConfiguration config = new CorsConfiguration();
             config.setAllowCredentials(true);
@@ -36,19 +35,23 @@ public class SecurityConfig {
         }));
 
         http.authorizeHttpRequests(auth -> auth
-                // rotas publicas
+                // Rotas públicas
                 .requestMatchers("/api/auth/**").permitAll()
                 
-                // leitura publica 
+                // Leitura pública de produtos/categorias
                 .requestMatchers(HttpMethod.GET, "/api/produtos/**").permitAll()
                 .requestMatchers(HttpMethod.GET, "/api/categorias/**").permitAll()
 
-                // imagens 
+                // Imagens públicas
                 .requestMatchers("/imagens/**").permitAll()
 
-                // rotas de admin
+                // Rotas de Admin 
                 .requestMatchers("/api/produtos/**").hasRole("ADMIN")
                 .requestMatchers("/api/categorias/**").hasRole("ADMIN")
+
+                
+                .requestMatchers("/api/pedidos/admin").hasRole("ADMIN") // Ver todos
+                .requestMatchers(HttpMethod.DELETE, "/api/pedidos/**").hasRole("ADMIN") // Apagar
 
                 
                 .anyRequest().authenticated()

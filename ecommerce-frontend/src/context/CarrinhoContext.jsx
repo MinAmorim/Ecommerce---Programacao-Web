@@ -1,44 +1,31 @@
-import { createContext, useState, useEffect, useContext } from "react";
+import { createContext, useState, useContext, useEffect } from "react";
 
 const CarrinhoContext = createContext();
 
 export function CarrinhoProvider({ children }) {
-  const [carrinho, setCarrinho] = useState([]);
+  const [carrinho, setCarrinho] = useState(() => {
+    const salvo = localStorage.getItem("carrinho");
+    return salvo ? JSON.parse(salvo) : [];
+  });
 
-  
-  useEffect(() => {
-    const carrinhoSalvo = localStorage.getItem("carrinho");
-    if (carrinhoSalvo) {
-      setCarrinho(JSON.parse(carrinhoSalvo));
-    }
-  }, []);
-
-  
   useEffect(() => {
     localStorage.setItem("carrinho", JSON.stringify(carrinho));
   }, [carrinho]);
 
-  const adicionarAoCarrinho = (produto, quantidadeSelecionada, tamanhoSelecionado) => {
+  const adicionarAoCarrinho = (produto, quantidade, tamanho) => {
     setCarrinho((prev) => {
       const itemExistente = prev.find(
-        (item) => item.id === produto.id && item.tamanho === tamanhoSelecionado
+        (item) => item.id === produto.id && item.tamanho === tamanho
       );
 
       if (itemExistente) {
         return prev.map((item) =>
-          item.id === produto.id && item.tamanho === tamanhoSelecionado
-            ? { ...item, quantidade: item.quantidade + quantidadeSelecionada }
+          item.id === produto.id && item.tamanho === tamanho
+            ? { ...item, quantidade: item.quantidade + quantidade }
             : item
         );
       } else {
-        return [
-          ...prev,
-          { 
-            ...produto, 
-            quantidade: quantidadeSelecionada, 
-            tamanho: tamanhoSelecionado 
-          },
-        ];
+        return [...prev, { ...produto, quantidade, tamanho }];
       }
     });
   };
@@ -47,12 +34,25 @@ export function CarrinhoProvider({ children }) {
     setCarrinho((prev) => prev.filter((item) => !(item.id === id && item.tamanho === tamanho)));
   };
 
+  
+  const atualizarQuantidade = (id, tamanho, novaQuantidade) => {
+    if (novaQuantidade < 1) return; 
+    
+    setCarrinho((prev) => 
+        prev.map((item) => 
+            (item.id === id && item.tamanho === tamanho) 
+            ? { ...item, quantidade: novaQuantidade }
+            : item
+        )
+    );
+  };
+
   const limparCarrinho = () => {
     setCarrinho([]);
   };
 
   const calcularTotal = () => {
-    return carrinho.reduce((total, item) => total + item.preco * item.quantidade, 0);
+    return carrinho.reduce((acc, item) => acc + item.preco * item.quantidade, 0);
   };
 
   return (
@@ -61,6 +61,7 @@ export function CarrinhoProvider({ children }) {
         carrinho,
         adicionarAoCarrinho,
         removerDoCarrinho,
+        atualizarQuantidade, 
         limparCarrinho,
         calcularTotal,
       }}

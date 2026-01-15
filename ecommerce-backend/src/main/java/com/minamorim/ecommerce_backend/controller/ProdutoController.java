@@ -118,7 +118,7 @@ public class ProdutoController {
             produtoRepository.deleteById(id);
             return ResponseEntity.ok("Produto excluído com sucesso.");
         } catch (DataIntegrityViolationException e) {
-            return ResponseEntity.badRequest().body("Não é possível excluir: Este produto já possui vendas ou está vinculado a outros registros.");
+            return ResponseEntity.badRequest().body("Não é possível excluir: Este produto já possui vendas");
         } catch (Exception e) {
             return ResponseEntity.internalServerError().body("Erro ao excluir produto: " + e.getMessage());
         }

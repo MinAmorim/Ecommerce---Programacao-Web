@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import "./Carrinho.css";
 
 function Carrinho() {
-  const { carrinho, removerDoCarrinho, calcularTotal, limparCarrinho } = useCarrinho();
+  const { carrinho, removerDoCarrinho, atualizarQuantidade, calcularTotal, limparCarrinho } = useCarrinho();
   const navigate = useNavigate();
 
   const handleFinalizar = async () => {
@@ -34,7 +34,7 @@ function Carrinho() {
       if (response.ok) {
         alert("🎉 Compra realizada com sucesso!");
         limparCarrinho(); 
-        navigate("/home"); 
+        navigate("/meus-pedidos"); 
       } else {
         const erro = await response.text();
         alert("Erro ao finalizar pedido: " + erro);
@@ -62,14 +62,21 @@ function Carrinho() {
         {carrinho.map((item) => (
           <div key={`${item.id}-${item.tamanho}`} className="item-carrinho">
             {item.imagemUrl && <img src={item.imagemUrl} alt={item.nome} />}
+            
             <div className="info">
               <h3>{item.nome}</h3>
-              <div style={{ display: "flex", gap: "15px", color: "#555", marginTop: "5px" }}>
-                <span><strong>Tamanho:</strong> {item.tamanho}</span>
-                <span><strong>Qtd:</strong> {item.quantidade}</span>
+              <p className="tam-text">Tamanho: <strong>{item.tamanho}</strong></p>
+              
+              
+              <div className="qtd-control">
+                <button onClick={() => atualizarQuantidade(item.id, item.tamanho, item.quantidade - 1)} disabled={item.quantidade <= 1}>-</button>
+                <span>{item.quantidade}</span>
+                <button onClick={() => atualizarQuantidade(item.id, item.tamanho, item.quantidade + 1)}>+</button>
               </div>
-              <p className="preco">R$ {(item.preco * item.quantidade).toFixed(2)}</p>
+
+              <p className="preco">Total: R$ {(item.preco * item.quantidade).toFixed(2)}</p>
             </div>
+
             <button className="btn-remove" onClick={() => removerDoCarrinho(item.id, item.tamanho)}>
               Remover
             </button>

@@ -80,21 +80,27 @@ function Home() {
     <div className="home-container">
       <header className="user-header">
         <div className="welcome-section">
-          <h1>Bem-vinda de volta!</h1>
+          <h1>Bem-vindo de volta!</h1>
           <p>{isAdmin ? "Modo Administrador " : "Confira as novidades!"}</p>
         </div>
         
         <div className="user-actions">
+          {/* AÇÕES DE CLIENTE*/}
           {!isAdmin && (
-            <button className="action-btn cart" onClick={() => navigate("/carrinho")} style={{background: "#f1c40f", color: "black"}}>
-              🛒 Carrinho ({carrinho.reduce((acc, item) => acc + item.quantidade, 0)})
-            </button>
+            <>
+              <button className="action-btn cart" onClick={() => navigate("/carrinho")} style={{background: "#f1c40f", color: "black"}}>
+                🛒 Carrinho ({carrinho.reduce((acc, item) => acc + item.quantidade, 0)})
+              </button>
+              <button className="action-btn" onClick={() => navigate("/meus-pedidos")}>Meus Pedidos</button>
+            </>
           )}
 
+          {/* AÇÕES DE ADMINISTRADOR */}
           {isAdmin && (
             <>
               <button className="action-btn admin" onClick={() => navigate("/admin/categorias")}>Categorias</button>
               <button className="action-btn admin" onClick={() => navigate("/admin/produtos")}>Produtos</button>
+              <button className="action-btn admin" onClick={() => navigate("/admin/pedidos")} style={{background: "#e67e22"}}>Pedidos</button>
             </>
           )}
 
@@ -112,7 +118,6 @@ function Home() {
           <div className="products-grid">
             {produtos.map((produto) => {
               const selecao = selecoes[produto.id] || { quantidade: 1, tamanho: "" };
-
               
               const estoqueTotal = produto.tamanhos 
                 ? produto.tamanhos.reduce((acc, t) => acc + t.quantidade, 0) 
@@ -169,13 +174,11 @@ function Home() {
                         <span className="stock-badge">Estoque Total: {estoqueTotal}</span>
                     )}
                     
-                    
                     {!isAdmin && estoqueTotal > 0 && (
                       <button className="buy-btn" onClick={() => handleComprar(produto)}>
                         Adicionar
                       </button>
                     )}
-                    
                     
                     {estoqueTotal === 0 && <span style={{color: "red", fontWeight: "bold"}}>ESGOTADO</span>}
                   </div>

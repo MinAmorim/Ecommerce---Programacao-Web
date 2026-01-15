@@ -86,3 +86,43 @@
   cursor: pointer;
   text-decoration: underline;
 }
+
+
+
+.qtd-control {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 10px 0;
+    background: #f0f0f0;
+    padding: 5px;
+    border-radius: 5px;
+    width: fit-content;
+}
+
+.qtd-control button {
+    width: 30px;
+    height: 30px;
+    border: none;
+    background: white;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.qtd-control button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.qtd-control span {
+    font-weight: bold;
+    min-width: 20px;
+    text-align: center;
+}
+
+.tam-text {
+    color: #555;
+    font-size: 0.9rem;
+}
